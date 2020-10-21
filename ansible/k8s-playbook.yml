@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Create a k8s namespace
+      k8s:
+        name: ansible
+        api_version: v1
+        kind: Namespace
+        state: present
+
+    - name: Create http deployment inline
+      k8s:
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: httpbin
+            namespace: ansible
+          spec:
+            replicas: 2
+            selector:
+              matchLabels:
+                app: httpbin
+                version: v1
+            template:
+              metadata:
+                labels:
+                  app: httpbin
+                  version: v1
+              spec:
+                containers:
+                  - image: docker.io/kennethreitz/httpbin
+                    imagePullPolicy: IfNotPresent
+                    name: httpbin
+                    ports:
+                      - containerPort: 80
+
+    - name: Create a service from file
+      k8s:
+        state: present
+        src: ./files/service.yml

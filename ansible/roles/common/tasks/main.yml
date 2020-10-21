@@ -1,0 +1,29 @@
+---
+- name: Install common packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - htop
+    - vim
+    - ufw
+    - ca-certificates
+    - unzip
+    - curl
+    - wget
+
+- name: Allow SSH through firewall
+  become: true
+  ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: Default Deny Policy
+  become: true
+  ufw:
+    state: enabled
+    default: deny
+    logging: on

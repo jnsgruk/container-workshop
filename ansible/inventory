@@ -1,0 +1,5 @@
+[webservers]
+<INSERT TWO OF THE AZURE VM IPs>
+
+[databases]
+<INSERT ONE OF THE AZURE VM IPS>

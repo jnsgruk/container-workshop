@@ -1,0 +1,38 @@
+---
+- name: Install nginx
+  become: true
+  apt:
+    name: nginx-full
+    state: present
+
+- name: Upload website files
+  become: true
+  copy:
+    src: files/public/
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+    mode: "0644"
+
+- name: Template the index file
+  become: true
+  template:
+    src: templates/index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: "0644"
+
+- name: Ensure the nginx service is running
+  become: true
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Enable Webserver Firewall Traffic
+  become: true
+  ufw:
+    rule: allow
+    port: "80"
+    proto: tcp

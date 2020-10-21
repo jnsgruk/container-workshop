@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: node-test
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: node-test
+  name: node-ssh-key
+data:
+  key: CHANGEME
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: node-test
+  name: aks-ssh
+spec:
+  containers:
+    - image: debian:latest
+      imagePullPolicy: IfNotPresent
+      name: aks-ssh
+      command:
+        - sleep
+        - "600"
+      volumeMounts:
+        - name: ssh-key
+          mountPath: "/root/.ssh"
+          readOnly: true
+  volumes:
+    - name: ssh-key
+      secret:
+        secretName: node-ssh-key
+        defaultMode: 0600
+        items:
+          - key: key
+            path: id_rsa

@@ -1,0 +1,3 @@
+infra/.terraform
+infra/*.tfstate*
+infra/*.info

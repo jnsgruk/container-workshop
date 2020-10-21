@@ -1,0 +1,21 @@
+# ansible-playbook -k docker-playbook.yml
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Build Docker Image
+      docker_image:
+        name: built-with-ansible
+        build:
+          path: ../docker/4-webserver
+          pull: yes
+        source: build
+
+    - name: Start Docker Container
+      docker_container:
+        name: web
+        image: built-with-ansible:latest
+        state: started
+        recreate: yes
+        ports:
+          - "80:80"
