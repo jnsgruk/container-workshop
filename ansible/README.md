@@ -22,3 +22,18 @@ This section contains some basic Ansible examples to demonstrate how Ansible can
     ├── docker              # Installs Docker and Docker Compose
     └── webserver           # Installs nginx and configures a default webpage (jnsgr.uk)
 ```
+
+### Configuring/Using These Roles
+
+If using the infrastructure deployment that [ships with this repo](../terraform), you'll need to populate the [inventory](./inventory) with some IP addresses returned by `terraform output` once the infra is created.
+
+The playbooks are run like so:
+
+```bash
+# Run the main playbook to configure web/database servers
+ansible-playbook -i inventory main-playbook.yml
+# Run the Docker playbook on local machine
+ansible-playbook -K docker-playbook.yml
+# Run the K8s playbook on local machine
+ansible-playbook -K k8s-playbook.yml
+```

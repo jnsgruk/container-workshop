@@ -14,3 +14,7 @@ An introductory workshop to Ansible, Docker and Kubernetes. Includes examples of
 - Kubernetes Network Policy
 - Helm deployments
 - Istio Service Mesh and Kiali dashboard
+
+### Getting Started
+
+The [infra](./infra) subdirectory contains some automation to deploy a set of test virtual machines for use with Ansible, and an Azure Kubernetes Service cluster for working through the Kubernetes tasks.

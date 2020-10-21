@@ -3,3 +3,6 @@
 
 [databases]
 <INSERT ONE OF THE AZURE VM IPS>
+
+[all:vars]
+ansible_user = azure_admin
