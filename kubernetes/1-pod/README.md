@@ -1,6 +1,6 @@
 ### 1 - Pods
 
-Pods are the smallest deployable unit in a Kubernetes cluster. A pod represents one or more running containers.
+[Pods](https://kubernetes.io/docs/concepts/workloads/pods/) are the smallest deployable unit in a Kubernetes cluster. A pod represents one or more running containers.
 
 ```bash
 # Apply the pod spec in this directory
