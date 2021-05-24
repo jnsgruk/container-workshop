@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name             = azurerm_resource_group.rg.name
   dns_prefix                      = "aks-js-wksp"
   api_server_authorized_ip_ranges = [chomp(data.http.icanhazip.body)]
-  kubernetes_version              = "1.18.6"
+  kubernetes_version              = "1.20.5"
   node_resource_group             = "aks-js-wksp-nodes"
 
   role_based_access_control {
